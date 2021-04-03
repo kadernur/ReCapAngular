@@ -1,19 +1,23 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CustomerResponseModel } from '../models/response/customerResponseModel';
+import { Brand } from '../models/entities/brand';
+import { Customer } from '../models/entities/customer';
+
+import { ListResponseModel } from '../models/response/listResponseModel';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerService {
-  apiUrl = 'https://localhost:44345/api/customers/getall';
+  apiUrl = 'https://localhost:44345/api/';
 
 
   constructor(private httpClient:HttpClient) { }
 
-  getCustomers():Observable<CustomerResponseModel>
+  getCustomers():Observable<ListResponseModel<Customer>>
   {
-    return this.httpClient.get<CustomerResponseModel>(this.apiUrl);
+    let newPath=this.apiUrl+"customers/getcustomerdetails"
+    return this.httpClient.get<ListResponseModel<Customer>>(newPath);
   }
 }
