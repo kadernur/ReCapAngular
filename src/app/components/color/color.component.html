@@ -1,4 +1,7 @@
-<div class="rounded-0 mt-4">
+
+
+
+<!-- <div class="rounded-0 mt-4">
   <li class="list-group-item list-group-item-action list-group-item-secondary"
   >Colors 🢓</li>
   <li (click)="setCurrentColor(color)"
@@ -6,4 +9,31 @@
    *ngFor="let color of colors" 
    [class]="getCurrentColorClass(color)">-{{color.colorName}}</li>
   
+</div> -->
+
+<h2 class="text-center" >  </h2>
+<div class=" mx-3 my-3 mr-4">  
+<table class="table "  style="background-color: #ffffff9f;">
+   
+  <thead>
+    
+      <tr>
+        
+      
+      </tr>
+
+  </thead>
+  <tr >
+     <td    (click)="clearCurrentColor()"  routerLink = "/cars" [class]="getAllColorClass()"> <h2> Tüm Renkler </h2>   </td>
+    <td  (click)="setCurrentColor(color)" 
+    routerLink = "/cars/color/{{color.colorId}}" 
+    *ngFor='let color of color'  
+      [class]="getCurrentColorClass(color)" > <h5> {{color.colorName}}  </h5>   </td>
+</tr>
+
+</table>
 </div>
+<h6 *ngIf="currentColor"  class="alert alert-success" > {{currentColor.colorName}} Seçtiniz :)  </h6>
+
+<!-- [class]="getAllBrandClass()" -->
+

@@ -12,7 +12,15 @@ import { NaviComponent } from './components/navi/navi.component';
 import { HttpClient } from '@angular/common/http';
 import { CarDetailComponent } from './components/car-detail/car-detail/car-detail.component';
 import { CarFilterComponent } from './components/car-filter/car-filter.component';
+import { FilterPipePipe } from './pipes/filter-pipe.pipe';
+import { VatAddedPipe } from './pipes/vat-added.pipe';
+import {FormsModule} from "@angular/forms";
+import { CarImageComponent } from './components/carImage/car-image/car-image.component';
 
+import{BrowserAnimationsModule} from "@angular/platform-browser/animations";
+
+import {ToastrModule} from "ngx-toastr"
+import { from } from 'rxjs';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,12 +31,23 @@ import { CarFilterComponent } from './components/car-filter/car-filter.component
     RentalComponent,
     NaviComponent,
     CarDetailComponent,
-    CarFilterComponent
+    CarFilterComponent,
+    FilterPipePipe,
+    VatAddedPipe,
+    CarImageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+
+      positionClass:"toast-bottom-right"
+
+
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

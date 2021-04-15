@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Color } from 'src/app/models/entities/color';
+
 import { ColorService } from 'src/app/services/color.service';
 
 @Component({
@@ -9,50 +10,46 @@ import { ColorService } from 'src/app/services/color.service';
 })
 export class ColorComponent implements OnInit {
 
-  colors:Color[]=[];
-  currentColor:Color;
-  //dataLoaded=false;
+  color:Color[] =[];
+  currentColor :Color;
+  emptyColor:Color;
   constructor(private colorService:ColorService) { }
 
   ngOnInit(): void {
-    this.getColors();
-
-  }
-  getColors()
-  {
-    this.colorService.getColors().subscribe((response)=>
-    {
-      this.colors=response.data
-     // this.dataLoaded=true;
-    })
-
+    this.getColor();
   }
 
-  setCurrentColor(color:Color)
-  {
-    this.currentColor=color;
+  getColor(){
+    this.colorService.getColors().subscribe(response => {
+    this.color = response.data;
+})
   }
 
-  getCurrentColorClass(color:Color)
-  {
-    if(color==this.currentColor)
-    {
+  setCurrentColor(color:Color){
+
+    this.currentColor = color;
+  }
+
+  getCurrentColorClass(color:Color){
+    if(color == this.currentColor){
       return "list-group-item active"
-    }
-    else{
+    }else{
       return "list-group-item"
     }
-  }
+   }
 
 
-  getAllColorClass(){
+   getAllColorClass(){
     if(!this.currentColor){
       return "list-group-item active"
     }else{
       return "list-group-item"
     }
+   }
+
+   clearCurrentColor() {
+    this.currentColor = this.emptyColor;
   }
-  setAllColor() {
-    return (this.currentColor = { colorId: 0, colorName: ' ' });
- } 
+  
+
 }

@@ -1,18 +1,52 @@
 <!-- <div *ngIf="dataLoaded==false" class="spinner-border text-primary" role="status">
   <span class="visually-hidden">Loading...</span>
   </div>  -->
+  <div class="mb-3">
+    <label for="filterText" class="form-label">Araba Ara</label>
+    <input type="text" [(ngModel)]="filterText" 
+    class="form-control" 
+    id="filterText" 
+    placeholder="arama ifadesi giriniz">
+  </div>
+
+  <div  *ngIf="filterText.length>2" class="alert alert-success">
+
+{{filterText}} aradınız
+
+  </div>
+
+
+  <div class="row row-cols-6 row-cols-md-6 g-6  " >  
   
+    <div class="card border-primary    mb-3 mb-6 col-md-6  mx-4 mt-5" style="width: 20rem;" 
+    
+    *ngFor="let car of cars | filterPipe:filterText ">
+    
+      <h2 style="background-color: #ffffff9f;" class="text-center" >Kiralık Araç</h2> 
+      <div >  
+
+        
   <div class="row"  >
     <div *ngFor="let car of cars" class="card" style="width: 20rem; padding: 10px; margin:10px;">
         <img src="https://localhost:44345/{{car.images}}" class="card-img-top" alt="{{car.descriptions}} Image" width="318" height="200">
         <div  class="card-body">
+
+
         </div >
+
+       
+
+
         <ul class="list-group list-group-flush">
+        <li class="list-group-item"><b>Marka:</b><span style="float: right;"> {{car.carName |uppercase}}</span></li>
         <li class="list-group-item"><b>Marka:</b><span style="float: right;"> {{car.brandName}}</span></li>
         <li class="list-group-item"><b>Renk:</b><span style="float: right;">{{car.colorName}}</span></li>
         <li class="list-group-item"><b>Model Yılı:</b> <span style="float: right;">{{car.modelYear}}</span></li>
-        <li class="list-group-item"><b>Fiyat:</b><span style="float: right;">{{car.dailyPrice}} </span></li>
+        <li class="list-group-item"><b>Fiyat:</b><span style="float: right;">{{car.dailyPrice  |currency}} </span></li>
+        <li class="list-group-item"><b>Fiyat:</b><span style="float: right;">{{car.dailyPrice |vatAdded:10 |currency}} </span></li>
+        <li class="list-group-item" ><button (click)= "addToCart(car)" type="button" class="btn btn-success"> Kirala</button></li>
         </ul>
+      
         <div class="card-body">
         <section style="float:left">
             <button routerLink="/cars/car-detail/{{car.carId}}" type="button" class="btn btn-secondary">Detaylar</button>
